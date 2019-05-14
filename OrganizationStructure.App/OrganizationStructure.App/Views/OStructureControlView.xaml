@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="OrganizationStructure.App.Views.OStructureControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:OrganizationStructure.App.CustomControls"
+             xmlns:Converters="clr-namespace:OrganizationStructure.App.Converters"
+             xmlns:local="clr-namespace:OrganizationStructure.App.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Converters:SelectedToEnableConverter x:Key="SelectedToEnableConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/TreeViewItemTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" MinWidth="250"/>
+        </Grid.ColumnDefinitions>
+
+
+        <controls:OSTreeView Grid.Column="0" x:Name="tvMain" ItemsSource="{Binding StructureModelRoot, Mode=TwoWay}" BorderThickness="0" SelectedItem_="{Binding SelectedStructureNode, Mode=TwoWay}" 
+                             >
+            <!--Style="{StaticResource OSTreeViewStyle}"-->
+            <!--<TreeView.Resources>
+                <ResourceDictionary Source="..\Style\TreeViewItemTemplate.xaml"/>
+            </TreeView.Resources>-->
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding SubStructures}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                        <TextBlock Text="{Binding PersonFullName, Mode=OneWay}"/>
+                        <TextBlock Text="{Binding PersonRole, Mode=OneWay}"/>
+                    </StackPanel>
+                    <!--<StackPanel>
+                        <Image Name="imgPicture" Source="{Binding ImagePath}" MaxHeight="30" MaxWidth="30"/>
+                        <TextBlock VerticalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} {1}">
+                                    <Binding Path="FirstName"/>
+                                    <Binding Path="LastName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>-->
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+
+        </controls:OSTreeView>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"  />
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel  Orientation="Vertical">
+                <TextBlock Text="Detail" HorizontalAlignment="Center"/>
+                <controls:LabelTextBlockControl Label="Name :"  Text="{Binding SelectedStructureNode.Name, Mode=OneWay}"/>
+                <controls:LabelTextBlockControl Label="Description :"  Text="{Binding SelectedStructureNode.Description, Mode=OneWay}"/>
+                <controls:LabelTextBlockControl Label="Person :"  Text="{Binding SelectedStructureNode.PersonFullName, Mode=OneWay}"/>
+                <controls:LabelTextBlockControl Label="Role :"  Text="{Binding SelectedStructureNode.PersonRole, Mode=OneWay}"/>
+            </StackPanel>
+
+            <Button Grid.Row="2"  Content="Add" Command="{Binding AddCommand}" CommandParameter="{Binding SelectedStructureNode.Id}" HorizontalAlignment="Left"/>
+            <Button Grid.Row="2"  Content="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedStructureNode.Id}" HorizontalAlignment="Center"
+                    IsEnabled="{Binding SelectedStructureNode, Converter={StaticResource SelectedToEnableConverter}}" />
+            <Button Grid.Row="2"  Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedStructureNode}" HorizontalAlignment="Right"
+                    IsEnabled="{Binding SelectedStructureNode, Converter={StaticResource SelectedToEnableConverter}}" />
+        </Grid>
+
+    </Grid>
+</UserControl>

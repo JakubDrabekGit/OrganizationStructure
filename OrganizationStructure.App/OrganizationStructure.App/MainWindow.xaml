@@ -1,0 +1,35 @@
+﻿<Window x:Class="OrganizationStructure.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Views="clr-namespace:OrganizationStructure.App.Views"
+        xmlns:VM="clr-namespace:OrganizationStructure.App.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Organization Structure" MinHeight="400" MinWidth="500" Height="600" Width="800" Icon="/Resources/Images/logo.ico">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type VM:StartViewModel}">
+            <Views:StartView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:OStructureMainViewModel}">
+            <Views:OStructureMainView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="{StaticResource ForegroundDarkBrush}" BorderThickness="0 0 0 2">
+            <Grid>
+                <Button Content="CREATE NEW" Command="{Binding CreateCommand}" HorizontalAlignment="Left" />
+                <Button Content="LOAD FROM SERVER" Command="{Binding LoadFromServerCommand}" HorizontalAlignment="Center" />
+                <Button Content="LOAD FROM LOCAL" Command="{Binding LoadFromLocalCommand}" HorizontalAlignment="Right" />
+            </Grid>
+        </Border>
+
+        <!--<ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding CurrentView}" />-->
+        <ContentPresenter  Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding CurrentViewModel, Mode=TwoWay}" />
+    </Grid>
+</Window>

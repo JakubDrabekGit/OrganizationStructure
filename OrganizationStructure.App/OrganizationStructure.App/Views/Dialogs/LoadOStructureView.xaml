@@ -1,0 +1,86 @@
+﻿<Window x:Class="OrganizationStructure.App.Views.Dialogs.LoadOStructureView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrganizationStructure.App.Views.Dialogs"
+        xmlns:controls="clr-namespace:OrganizationStructure.App.CustomControls"
+        mc:Ignorable="d"
+        Name="LoadOrganizationStructureDialog"
+        WindowStartupLocation="CenterScreen"
+        Title="Load Organization Structure" Height="300" Width="500" MinWidth="450" MinHeight="250" Icon="/Resources/Images/logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="LOAD ORGANIZATION STRUCTURE" Style="{StaticResource TitleText}"/>
+
+        <!--<ListView x:Name="PersonsListView" ItemsSource="{Binding OStructures}" SelectedItem="{Binding SelectedOStructure, Mode=TwoWay}"  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding CompanyName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+
+        <ListView Grid.Row="1" x:Name="OStrucuresListView" ItemsSource="{Binding OStructures}" SelectedItem="{Binding SelectedOStructure, Mode=TwoWay}"  >
+            <ListView.Style>
+                <Style TargetType="{x:Type ListView}">
+                    <Style.Triggers>
+                        <Trigger Property="HasItems" Value="False">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Margin="0 20" Style="{StaticResource BaseText}">No items to display</TextBlock>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Style>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Company Name" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CompanyName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Created Date" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CreatedDate, StringFormat=dd.MM. yyyy hh:mm:ss}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Last Updated Date" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LastUpdatedDate, StringFormat=dd.MM. yyyy hh:mm:ss}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!--<GridViewColumn Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding ElementName=OStrucuresListView, Path=DataContext.EditCommand}" CommandParameter="{Binding Id}">
+                                    <Image Height="20" Width="20" Source="..\Resources\Images\Open.svg" />
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="btnCreate" Grid.Row="3" Content="LOAD" Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=LoadOrganizationStructureDialog}" HorizontalAlignment="Left" />
+        <Button x:Name="btnCancel"  Grid.Row="3" Content="CANCEL" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

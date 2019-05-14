@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="OrganizationStructure.App.Views.OStructureMainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OrganizationStructure.App.Views"
+             xmlns:controls="clr-namespace:OrganizationStructure.App.CustomControls"
+             xmlns:Views="clr-namespace:OrganizationStructure.App.Views"
+        xmlns:VM="clr-namespace:OrganizationStructure.App.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type VM:OStructureControlViewModel}">
+            <Views:OStructureControlView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:PersonsViewModel}">
+            <Views:PersonsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:RolesViewModel}">
+            <Views:RolesView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+            
+        <controls:LabelTextBlockControl Grid.Row="0" Label="Company Name :" Text="{Binding CompanyName, FallbackValue=ARTIN, Mode=OneWay}" HorizontalAlignment="Left"/>
+        
+        <Button Grid.Row="0" Content="Save to server" HorizontalAlignment="Right" Command="{Binding SaveToServerCommand}" Margin="0 10 100 10"/>
+        <Button Grid.Row="0" Content="Save" HorizontalAlignment="Right" Command="{Binding SaveToLocalCommand}"/>
+
+        
+        <Button Grid.Row="1" Content="Organization structure" HorizontalAlignment="Left" Command="{Binding LoadOrganizationStructureViewCommand}"/>
+        <Button Grid.Row="1" Content="Persons" HorizontalAlignment="Center" Command="{Binding LoadPersonViewCommand}"/>
+        <Button Grid.Row="1" Content="Roles" HorizontalAlignment="Right" Command="{Binding LoadRoleViewCommand}" />
+
+        <Border Grid.Row="1" BorderBrush="{StaticResource ForegroundDarkBrush}" BorderThickness="0 0 0 2"/>
+        <!--<ContentControl Grid.Row="2" Content="{Binding SubCurrentView}"/>-->
+
+        <ContentControl Grid.Row="2" Content="{Binding SubCurrentViewModel}"/>
+
+    </Grid>
+</UserControl>

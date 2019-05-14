@@ -1,0 +1,62 @@
+﻿<Window x:Class="OrganizationStructure.App.CustomWindows.MessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrganizationStructure.App.CustomWindows"
+        mc:Ignorable="d"
+        AllowsTransparency="True" Icon="/Resources/Images/logo.ico"
+        ResizeMode="NoResize" WindowStyle="None" WindowState="Maximized"
+        Title="MessageBoxWindow" d:DesignWidth="450" d:DesignHeight="200">
+    <Window.Background>
+        <SolidColorBrush Color="Black" Opacity="0.3"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1" x:Name="GridMain" Background="White">
+            <Grid Margin="50 15 50 15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="35" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="imgIco" Grid.Row="0" Grid.Column="0" Height="42" Source="{Binding Ico, FallbackValue=Resources/MessageBox/ico-info.png}" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="0 15 0 0" />
+                <!--Style="{StaticResource InfoTextBlockMessageBoxStyle}"-->
+                <TextBlock x:Name="txtHead" Grid.Row="0" Grid.Column="1" Text="{Binding HeadText, FallbackValue=Nadpis}" VerticalAlignment="Bottom">
+                    <!--<TextBlock.Style>
+                        <MultiBinding Converter="{StaticResource styleConverter}" UpdateSourceTrigger="PropertyChanged">
+                            <MultiBinding.Bindings>
+                                <Binding RelativeSource="{RelativeSource Self}"/>
+                                <Binding Path="HeadStyle" UpdateSourceTrigger="PropertyChanged"/>
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </TextBlock.Style>-->
+                </TextBlock>
+                <TextBlock x:Name="txtMessage" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Message info" TextWrapping="Wrap" MaxWidth="{Binding MaxMessageWidth}" Margin="5" />
+
+                <Grid x:Name="GridCloseBtn" Grid.Row="2" Grid.Column="1" Visibility="Collapsed">
+                    <Button x:Name="BtnClose"  Content="ZAVŘÍT" Width="120" Click="BtnClose_Click" HorizontalAlignment="Left" />
+                </Grid>
+
+                <Grid x:Name="GridYesNoBtn" Grid.Row="2" Grid.Column="1" Visibility="Visible" MinWidth="260">
+                    <Button x:Name="BtnYes" Grid.Row="2" Grid.Column="1" Content="ANO" Width="120" Click="BtnYes_Click" HorizontalAlignment="Left" />
+                    <Button x:Name="BtnNo" Grid.Row="2" Grid.Column="1" Content="NE" Width="120" Click="BtnNo_Click" HorizontalAlignment="Right"  />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

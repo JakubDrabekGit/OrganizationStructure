@@ -1,0 +1,39 @@
+﻿<Window x:Class="OrganizationStructure.App.Views.RoleDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:OrganizationStructure.App.CustomControls"
+        xmlns:local="clr-namespace:OrganizationStructure.App.Views"
+        mc:Ignorable="d"
+        Name="RoleDetailViewDialog"
+        WindowStartupLocation="CenterScreen"
+        Title="Role Management" Height="220" Width="350" ResizeMode="NoResize" Icon="/Resources/Images/logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <controls:LabelTextBoxControl Grid.Row="0" Label="Role Name :" Text="{Binding RoleName}" />
+        <controls:LabelTextBoxWrapControl Grid.Row="1" Label="Role Description :" Text="{Binding RoleDescription}" />
+
+        <Button Grid.Row="3" Command="{Binding SaveRoleCommand}"  CommandParameter="{Binding ElementName=RoleDetailViewDialog}" Width="100" HorizontalAlignment="Left">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditMode}" Value="True">
+                                <Setter Property="Content" Value="Save" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding EditMode}" Value="False">
+                                <Setter Property="Content" Value="Add" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        <Button Grid.Row="3" x:Name="btnCancel" Content="Cancel" Margin="10" Width="100" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>
