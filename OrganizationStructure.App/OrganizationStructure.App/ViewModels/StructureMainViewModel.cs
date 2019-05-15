@@ -12,12 +12,15 @@ using System.Windows.Input;
 
 namespace OrganizationStructure.App.ViewModels
 {
-    public class OStructureMainViewModel : Base.BaseViewModel
+    public class StructureMainViewModel : Base.BaseViewModel
     {
-        private Base.BaseViewModel _SubCurrentViewModel;
+        private Base.BaseViewModel _SubCurrentVM;
         private OrganizationStructureService _StructureService;
-        
-        public OStructureMainViewModel()
+        private StructureViewModel _StructureVM;
+        private PersonsViewModel _PersonsVM;
+        private RolesViewModel _RolesVM;
+
+        public StructureMainViewModel()
         {
             LoadOrganizationStructureViewCommand = new RelayCommandBase(LoadOrganizationStructureAction);
             LoadPersonViewCommand = new RelayCommandBase(LoadPersonAction);
@@ -53,12 +56,60 @@ namespace OrganizationStructure.App.ViewModels
         {
             get
             {
-                return _SubCurrentViewModel;
+                return _SubCurrentVM;
             }
             set
             {
-                _SubCurrentViewModel = value;
+                _SubCurrentVM = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public StructureViewModel StructureVM
+        {
+            get
+            {
+                if (_StructureVM == null)
+                {
+                    _StructureVM = new StructureViewModel();
+                }
+                return _StructureVM;
+            }
+            set
+            {
+                _StructureVM = value;
+            }
+        }
+
+        public PersonsViewModel PersonsVM
+        {
+            get
+            {
+                if (_PersonsVM == null)
+                {
+                    _PersonsVM = new PersonsViewModel();
+                }
+                return _PersonsVM;
+            }
+            set
+            {
+                _PersonsVM = value;
+            }
+        }
+
+        public RolesViewModel RolesVM
+        {
+            get
+            {
+                if (_RolesVM == null)
+                {
+                    _RolesVM = new RolesViewModel();
+                }
+                return _RolesVM;
+            }
+            set
+            {
+                _RolesVM = value;
             }
         }
 
@@ -67,17 +118,17 @@ namespace OrganizationStructure.App.ViewModels
 
         private void LoadOrganizationStructureAction()
         {
-            SubCurrentViewModel = new OStructureControlViewModel();
+            SubCurrentViewModel = StructureVM;
         }
 
         private void LoadPersonAction()
         {
-            SubCurrentViewModel = new PersonsViewModel();
+            SubCurrentViewModel = PersonsVM;
         }
 
         private void LoadRoleAction()
         {
-            SubCurrentViewModel = new RolesViewModel();
+            SubCurrentViewModel = RolesVM;
         }
 
         private void SaveToLocalAction(object data)

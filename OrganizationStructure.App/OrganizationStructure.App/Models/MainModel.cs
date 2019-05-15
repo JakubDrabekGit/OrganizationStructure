@@ -20,115 +20,20 @@ namespace OrganizationStructure.App.Models
         {
             Roles.CollectionChanged += CollectionChanged;
             Persons.CollectionChanged += CollectionChanged;
-            //DataModel model = JsonConvert.DeserializeObject<DataModel>(json);
-            //this.Structures = model.Structures;
-            //this.Roles = model.Roles;
-            //this.Persons = model.Persons;
-
-
-            //this.Persons = new ObservableCollection<Person>()
-            //{
-            //    new Person()
-            //    {
-            //        Id = 1,
-            //        FirstName = "Jan",
-            //        LastName = "Petrik",
-            //         RoleId = 1
-            //    },
-            //    new Person()
-            //    {
-            //        Id = 2,
-            //        FirstName = "Pepa",
-            //        LastName = "Zdepa",
-            //         RoleId = 2,
-
-            //    },
-            //    new Person()
-            //    {
-            //        Id = 3,
-            //        FirstName = "Viktor",
-            //        LastName = "Hugo",
-            //        RoleId = 1
-            //    }
-            //};
-            //this.Roles = new ObservableCollection<Role>()
-            //{
-            //    new Role()
-            //    {
-            //        Id =  1,
-            //        Name = "Director",
-            //        Description = "Director is..."
-            //    },
-
-            //    new Role()
-            //    {
-            //        Id =  2,
-            //        Name = "Manager",
-            //        Description = "Manager is..."
-            //    }
-            //};
-            //this.StructureModel = new OrganizationStructureModel()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    CompanyName = "Artin company",
-            //    RootStructure = new StructureModel()
-            //    {
-            //        Id = 1,
-            //        Name = "Structure model",
-            //        PersonId = 1,
-            //        SubStructures = new ObservableCollection<StructureModel>()
-            //        {
-            //            new StructureModel()
-            //            {
-            //                 Id = 1,
-            //                Name = "Structure model2",
-            //                PersonId = 1,
-            //            }
-            //        }
-            //    }
-            //};
-
         }
 
         public void CreateOrganizationStructure(string companyName)
         {
             this.Persons.Clear();
             this.Roles.Clear();
-            //StructureModel = new OrganizationStructureModel()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    CompanyName = companyName,
-            //};
 
             this.StructureModel = new OrganizationStructureModel()
             {
                 Id = Guid.NewGuid(),
                 CompanyName = companyName,
                 CreatedDate = DateTime.Now,
-                //RootStructure = new ObservableCollection<StructureModel>()
-                //    {
-                //        new StructureModel()
-                //        {
-                //            Id = 2,
-                //            Name = "Structure model",
-                //            PersonId = 1,
-                //            SubStructures = new ObservableCollection<StructureModel>()
-                //            {
-                //                new StructureModel()
-                //                {
-                //                     Id = 3,
-                //                    Name = "Structure model2",
-                //                    PersonId = 2,
-                //                }
-                //            }
-                //        }
-                //    }
-
             };
         }
-
-
-
         public int GetNewPersonId()
         {
             int maxId;
@@ -218,18 +123,6 @@ namespace OrganizationStructure.App.Models
                 newId = 1;
             }
             return newId;
-
-            //int newId, maxId;
-            //if (this.StructureModel.RootStructure.Count > 0)
-            //{
-            //    maxId = this.StructureModel.RootStructure.Select(x => x.Id).Max();
-            //    newId = maxId++;
-            //}
-            //else
-            //{
-            //    newId = 1;
-            //}
-            //return newId;
         }
 
         public List<StructureModel> GetAllStructures()

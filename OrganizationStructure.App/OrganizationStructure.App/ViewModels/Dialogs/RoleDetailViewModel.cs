@@ -76,13 +76,6 @@ namespace OrganizationStructure.App.ViewModels
                 role.Name = RoleName;
                 role.Description = RoleDescription;
                 role.UpdateModel();
-                //foreach (var item in StructureService.GetAllPositions())
-                //{
-                //    if (item.PersonId == person.Id)
-                //    {
-                //        item.UpdateUi();
-                //    }
-                //}
             }
             else
             {

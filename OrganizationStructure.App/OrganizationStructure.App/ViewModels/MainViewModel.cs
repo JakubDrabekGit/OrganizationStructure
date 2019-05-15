@@ -15,6 +15,8 @@ namespace OrganizationStructure.App.ViewModels
     public class MainViewModel : Base.BaseViewModel
     {
         private Base.BaseViewModel _CurrentViewModel;
+        private StructureMainViewModel _OStructureMainVM;
+        private StartViewModel _StartVM;
 
         public MainViewModel()
         {
@@ -22,7 +24,7 @@ namespace OrganizationStructure.App.ViewModels
             LoadFromServerCommand = new RelayCommandBase(LoadFromServerAction);
             LoadFromLocalCommand = new RelayCommandBase(LoadFromLocalAction);
 
-            CurrentViewModel = new StartViewModel();
+            CurrentViewModel = StartVM;
         }
 
         public ICommand CreateCommand { get; set; }
@@ -41,7 +43,39 @@ namespace OrganizationStructure.App.ViewModels
                 OnPropertyChanged();
             }
         }
-       
+
+        public StartViewModel StartVM
+        {
+            get
+            {
+                if (_StartVM == null)
+                {
+                    _StartVM = new StartViewModel();
+                }
+                return _StartVM;
+            }
+            set
+            {
+                _StartVM = value;
+            }
+        }
+
+        public StructureMainViewModel OStructureMainVM
+        {
+            get
+            {
+                if (_OStructureMainVM == null)
+                {
+                    _OStructureMainVM = new StructureMainViewModel();
+                }
+                return _OStructureMainVM;
+            }
+            set
+            {
+                _OStructureMainVM = value;
+            }
+        }
+
         private void CreateAction()
         {
             CreateOStructureView createOSDialog = new CreateOStructureView();
@@ -49,7 +83,7 @@ namespace OrganizationStructure.App.ViewModels
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                CurrentViewModel = new OStructureMainViewModel();
+                CurrentViewModel = OStructureMainVM;
             }
         }
 
@@ -61,7 +95,7 @@ namespace OrganizationStructure.App.ViewModels
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                CurrentViewModel = new OStructureMainViewModel();
+                CurrentViewModel = OStructureMainVM;
             }
         }
 
@@ -73,7 +107,7 @@ namespace OrganizationStructure.App.ViewModels
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                CurrentViewModel = new OStructureMainViewModel();
+                CurrentViewModel = OStructureMainVM;
             }
         }
     }

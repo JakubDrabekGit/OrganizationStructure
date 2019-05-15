@@ -8,9 +8,10 @@
         mc:Ignorable="d"
         Name="PersonDetailViewDialog"
         WindowStartupLocation="CenterScreen"
-        Title="Person Management" Height="180" Width="300" ResizeMode="NoResize" Icon="/Resources/Images/logo.ico">
+        Title="Person Management" Height="220" Width="300" ResizeMode="NoResize" Icon="/Resources/Images/logo.ico">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -19,13 +20,21 @@
         <controls:LabelTextBoxControl Grid.Row="0" Label="First Name :" Text="{Binding FirstName}" />
         <controls:LabelTextBoxControl Grid.Row="1" Label="Last Name :" Text="{Binding LastName}"/>
 
+        <Grid Grid.Row="2" Margin="20 10 10 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Role :" HorizontalAlignment="Left" Margin="0 0 10 0"/>
+            <ComboBox  Grid.Column="1" ItemsSource="{Binding Roles}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedRole, Mode=TwoWay}" />
+        </Grid>
         <!--<Label Content="First Name:" Grid.Row="0" VerticalAlignment="Center" />
         <Label Content="Last Name:" Grid.Row="1" VerticalAlignment="Center" />
 
         <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding FirstName}" VerticalAlignment="Center"   />
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding LastName}" VerticalAlignment="Center"  />-->
 
-        <Button Grid.Row="3" Command="{Binding SavePersonCommand}"  CommandParameter="{Binding ElementName=PersonDetailViewDialog}" HorizontalAlignment="Left" >
+        <Button Grid.Row="4" Command="{Binding SavePersonCommand}"  CommandParameter="{Binding ElementName=PersonDetailViewDialog}" HorizontalAlignment="Left" >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
@@ -39,6 +48,6 @@
                     </Style>
                 </Button.Style>
             </Button>
-        <Button Grid.Row="3" x:Name="btnCancel" Content="Cancel" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
+        <Button Grid.Row="4" x:Name="btnCancel" Content="Cancel" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

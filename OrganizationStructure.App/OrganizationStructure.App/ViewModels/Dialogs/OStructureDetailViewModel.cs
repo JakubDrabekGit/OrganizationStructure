@@ -17,7 +17,6 @@ namespace OrganizationStructure.App.ViewModels
         private string _StructureName;
         private string _StructureDescription;
         private Person _SelectedPerson;
-        private Role _SelectedRole;
 
         public OStructureDetailViewModel(int? structureId, bool editMode/*, int? parentStructureId*/)
         {
@@ -33,7 +32,6 @@ namespace OrganizationStructure.App.ViewModels
                 this.StructureName = structureModel.Name;
                 this.StructureDescription = structureModel.Description;
                 this.SelectedPerson = StructureService.GetPerson(structureModel.PersonId);
-                this.SelectedRole = StructureService.GetRole(SelectedPerson?.RoleId);
             }
 
             SaveCommand = new RelayCommand<System.Windows.Window> (SaveAction);
@@ -87,17 +85,6 @@ namespace OrganizationStructure.App.ViewModels
             set
             {
                 SetProperty(ref _SelectedPerson, value);
-                //OnPropertyChanged("IsAssignedPerson");
-            }
-        }
-
-        public Role SelectedRole
-        {
-            get { return _SelectedRole; }
-            set
-            {
-                SetProperty(ref _SelectedRole, value);
-                //OnPropertyChanged("IsAssignedPerson");
             }
         }
         
@@ -124,11 +111,7 @@ namespace OrganizationStructure.App.ViewModels
                 {
                     structureModel.PersonId = this.SelectedPerson.Id;
                 }
-
-                if (SelectedRole != null)
-                {
-                    SelectedPerson.RoleId = SelectedRole.Id;
-                }
+              
                 structureModel.UpdateModel();
             }
             else
@@ -154,8 +137,8 @@ namespace OrganizationStructure.App.ViewModels
                     GlobalInstance.Instance.Model.StructureModel.RootStructure.Add(structureModel);
                     structureModel.UpdateModel();
                 }
-                
-                //MainModel.Instance.AddStructure(structureModel);
+
+                structureModel.UpdateModel();
             }
 
             CloseWindow(window);

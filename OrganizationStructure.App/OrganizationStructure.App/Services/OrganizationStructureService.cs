@@ -39,20 +39,6 @@ namespace OrganizationStructure.App.Services
             }
         }
 
-        //internal void DeletePerson(int id)
-        //{
-        //    var person = MainModel.Instance.Persons.Select(x => x).Where(x => x.Id == id).FirstOrDefault();
-        //    MainModel.Instance.Persons.Remove(person);
-
-        //    //foreach (var item in GetAllPositions())
-        //    //{
-        //    //    if (item.PersonId == id)
-        //    //    {
-        //    //        item.PersonId = 0;
-        //    //    }
-        //    //}
-        //}
-
         internal void CreateOrganizationStructure(string companyName)
         {
             GlobalInstance.Instance.Model.CreateOrganizationStructure(companyName);

@@ -10,6 +10,11 @@ namespace OrganizationStructure.App.Models
     {
         private static GlobalInstance instance;
 
+        private GlobalInstance()
+        {
+
+        }
+
         public static GlobalInstance Instance
         {
             get

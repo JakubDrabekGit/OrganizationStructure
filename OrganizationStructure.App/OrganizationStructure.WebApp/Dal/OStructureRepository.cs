@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -8,15 +9,29 @@ namespace OrganizationStructure.WebApp.Dal
 {
     public class OStructureRepository
     {
-        private const string FilesFolder = "Files";
+        //private const string FilesFolder = "Files";
+        const string BasePathFilesAppKey = "PathFiles";
+
+        private string _BasePathFiles;
+        public string BasePathFiles
+        {
+            get
+            {
+                if (_BasePathFiles == null)
+                {
+                    _BasePathFiles = ConfigurationManager.AppSettings[BasePathFilesAppKey];
+                }
+                return _BasePathFiles;
+            }
+        }
 
         public void SaveOrganizationStructure(string fileName, string oStructureModelJSON)
         {
-            string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FilesFolder);
+            //string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FilesFolder);
 
-            CheckExistsFolder(basePath);
+            CheckExistsFolder(BasePathFiles);
 
-            var path = Path.Combine(basePath, GetFileName(fileName));
+            var path = Path.Combine(BasePathFiles, GetFileName(fileName));
             File.WriteAllText(path, oStructureModelJSON);
         }
 
@@ -25,11 +40,12 @@ namespace OrganizationStructure.WebApp.Dal
         {
             Dictionary<Guid, string> result = new Dictionary<Guid, string>();
 
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FilesFolder);
+            
+            //string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FilesFolder);
 
-            if (Directory.Exists(path))
+            if (Directory.Exists(BasePathFiles))
             {
-                string[] filePaths = Directory.GetFiles(path, "*.json");
+                string[] filePaths = Directory.GetFiles(BasePathFiles, "*.json");
 
                 foreach (var filePath in filePaths)
                 {
@@ -44,7 +60,7 @@ namespace OrganizationStructure.WebApp.Dal
 
         private void CheckExistsFolder(string path)
         {
-            if (!Directory.Exists(FilesFolder))
+            if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }

@@ -3,6 +3,7 @@ using OrganizationStructure.App.Services;
 using OrganizationStructure.App.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace OrganizationStructure.App.ViewModels
         private OrganizationStructureService _StructureService;
         private string _FirstName;
         private string _LastName;
+        private Role _SelectedRole;
 
         public PersonDetailViewModel(int? personId)
         {
@@ -52,6 +54,14 @@ namespace OrganizationStructure.App.ViewModels
                 SetProperty(ref _LastName, value);
             }
         }
+        public Role SelectedRole
+        {
+            get { return _SelectedRole; }
+            set
+            {
+                SetProperty(ref _SelectedRole, value);
+            }
+        }
         public OrganizationStructureService StructureService
         {
             get
@@ -64,6 +74,11 @@ namespace OrganizationStructure.App.ViewModels
             }
         }
 
+        public ObservableCollection<Role> Roles
+        {
+            get { return GlobalInstance.Instance.Model.Roles; }
+        }
+
         private void SavePersonAction(System.Windows.Window window)
         {
             if (EditMode)
@@ -71,22 +86,37 @@ namespace OrganizationStructure.App.ViewModels
                 var person = StructureService.GetPerson(this.PersonId.Value);
                 person.FirstName = FirstName;
                 person.LastName = LastName;
-                person.UpdateModel();
-                foreach (var item in StructureService.GetAllStructures())
+                if (SelectedRole != null)
                 {
-                    if (item.PersonId == person.Id)
+                    person.RoleId = SelectedRole.Id;
+                }
+                person.UpdateModel();
+                var allStructures = StructureService.GetAllStructures();
+                if (allStructures != null)
+                {
+                    foreach (var item in allStructures)
                     {
-                        item.UpdateModel();
+                        if (item.PersonId == person.Id)
+                        {
+                            item.UpdateModel();
+                        }
                     }
                 }
             }
             else
             {
+                int? roleId = null;
+                if (SelectedRole != null)
+                {
+                    roleId = SelectedRole.Id;
+                }
+
                 var person = new Person()
                 {
                     Id = StructureService.GetNewPersonId(),
                     FirstName = FirstName,
-                    LastName = LastName
+                    LastName = LastName,
+                    RoleId = roleId,
                 };
                 StructureService.AddPerson(person);
             }

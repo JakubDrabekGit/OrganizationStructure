@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace OrganizationStructure.App.Views
 {
     /// <summary>
-    /// Interaction logic for OnStructureControlView.xaml
+    /// Interaction logic for StructureView.xaml
     /// </summary>
-    public partial class OStructureControlView : UserControl
+    public partial class StructureView : UserControl
     {
-        public OStructureControlView()
+        public StructureView()
         {
             InitializeComponent();
-            this.DataContext = new OStructureControlViewModel();
+            this.DataContext = new StructureViewModel();
         }
     }
 }

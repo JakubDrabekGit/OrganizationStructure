@@ -54,11 +54,6 @@ namespace OrganizationStructure.App.ViewModels
                 if (_selectedRole == null)
                     return;
                 OnPropertyChanged();
-
-                //OnPropertyChanged(nameof(Persons));
-                //SelectedCommand.Execute(_selectedItem);
-
-                //SelectedItem = null;
             }
         }
 

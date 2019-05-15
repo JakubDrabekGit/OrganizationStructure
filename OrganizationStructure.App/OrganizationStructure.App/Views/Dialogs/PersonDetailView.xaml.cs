@@ -27,13 +27,10 @@ namespace OrganizationStructure.App.Views
             this.DataContext = new PersonDetailViewModel(personId);
 
         }
-
         
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            
             this.Close();
         }
-      
     }
 }

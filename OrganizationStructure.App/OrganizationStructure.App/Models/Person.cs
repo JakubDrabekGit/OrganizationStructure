@@ -65,7 +65,7 @@ namespace OrganizationStructure.App.Models
                 }
                 else
                 {
-                    return string.Empty;
+                    return String.Empty;
                 }
             }
         }
@@ -80,38 +80,5 @@ namespace OrganizationStructure.App.Models
         {
             return Id.CompareTo(other.Id);
         }
-
-        //private Role _selectedRole;
-        //public Role SelectedRole
-        //{
-        //    get
-        //    {
-        //        if (_selectedRole == null)
-        //        {
-        //            _selectedRole = MainModel.Instance.Roles.Where(x => x.Id == RoleId).FirstOrDefault();
-        //        }
-
-        //        return _selectedRole;
-        //    }
-        //    set
-        //    {
-        //        _selectedRole = value;
-        //        if (_selectedRole != null)
-        //        {
-        //            RoleId = _selectedRole.Id;
-        //            OnPropertyChanged(nameof(RoleId));
-        //        }
-
-
-
-
-        //        OnPropertyChanged();
-
-        //        //SelectedCommand.Execute(_selectedItem);
-
-        //        //SelectedItem = null;
-        //    }
-        //}
-
     }
 }

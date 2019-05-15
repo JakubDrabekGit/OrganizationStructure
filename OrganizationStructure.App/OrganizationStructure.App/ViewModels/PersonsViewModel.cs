@@ -20,7 +20,6 @@ namespace OrganizationStructure.App.ViewModels
 
         public PersonsViewModel()
         {
-            //GlobalDataModel.Instance.Model.PropertyChanged += Model_PropertyChanged;
             DeletePersonCommand = new RelayCommand<int>(DeletePersonAction);
             EditPersonCommand = new RelayCommand<int>(EditPersonAction);
             AddPersonCommand = new RelayCommandBase(AddPersonAction);
@@ -55,11 +54,6 @@ namespace OrganizationStructure.App.ViewModels
                 if (_selectedPerson == null)
                     return;
                 OnPropertyChanged();
-
-                //OnPropertyChanged(nameof(Persons));
-                //SelectedCommand.Execute(_selectedItem);
-
-                //SelectedItem = null;
             }
         }
 

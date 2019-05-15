@@ -47,7 +47,6 @@ namespace OrganizationStructure.App.ViewModels.Dialogs
         }
 
         public ICommand LoadCommand { get; set; }
-        //public ObservableCollection<MainModel> OStructures { get; set; }
 
         public OrganizationStructureService StructureService
         {

@@ -13,12 +13,12 @@ using System.Windows.Input;
 
 namespace OrganizationStructure.App.ViewModels
 {
-    public class OStructureControlViewModel : Base.BaseViewModel
+    public class StructureViewModel : Base.BaseViewModel
     {
         private OrganizationStructureService _StructureService;
         private StructureModel _selectedStructureNode;
 
-        public OStructureControlViewModel()
+        public StructureViewModel()
         {
             AddCommand = new RelayCommand<int?>(AddStructureAction);
             EditCommand = new RelayCommand<int>(EditStructureAction);
@@ -53,7 +53,6 @@ namespace OrganizationStructure.App.ViewModels
                 OnPropertyChanged();
             }
         }
-
         
         public StructureModel SelectedStructureNode
         {

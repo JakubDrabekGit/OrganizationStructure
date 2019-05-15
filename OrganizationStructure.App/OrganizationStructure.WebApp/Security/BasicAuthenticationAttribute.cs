@@ -40,6 +40,7 @@ namespace OrganizationStructure.WebApp.Security
 
         public static bool IsAuthorizedUser(string Username, string Password)
         {
+            //todo load from web config
             return Username == "LoginUser" && Password == "Pa55w0rd";
         }
 

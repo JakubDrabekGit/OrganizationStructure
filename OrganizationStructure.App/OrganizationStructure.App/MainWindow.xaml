@@ -12,8 +12,8 @@
         <DataTemplate DataType="{x:Type VM:StartViewModel}">
             <Views:StartView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type VM:OStructureMainViewModel}">
-            <Views:OStructureMainView/>
+        <DataTemplate DataType="{x:Type VM:StructureMainViewModel}">
+            <Views:StructureMainView/>
         </DataTemplate>
     </Window.Resources>
     <Grid>

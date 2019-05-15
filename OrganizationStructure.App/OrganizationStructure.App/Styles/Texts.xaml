@@ -20,6 +20,15 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
     </Style>
 
-   
+    <Style TargetType="{x:Type TextBlock}" x:Key="TitleTreeViewItem" BasedOn="{StaticResource HeaderText}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="RoleTreeViewItem" BasedOn="{StaticResource HeaderText}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
+        <Setter Property="FontStyle" Value="Italic" />
+    </Style>
+
 
 </ResourceDictionary>
