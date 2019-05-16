@@ -66,13 +66,13 @@ namespace OrganizationStructure.App.Services
             IRestResponse<OrganizationStructuresModel> response = client.Execute<OrganizationStructuresModel>(request);
             return response.Data;
         }
-        public OrganizationStructuresModel GetOrganizationStructure(Guid id)
+        public OrganizationStructureModel GetOrganizationStructure(Guid id)
         {
             var client = new RestClient(BaseUrl);
             client.Authenticator = new HttpBasicAuthenticator(LoginName, LoginPassword);
 
             var request = new RestRequest($"{ResourceName}/{id}", Method.GET);
-            IRestResponse<OrganizationStructuresModel> response = client.Execute<OrganizationStructuresModel>(request);
+            IRestResponse<OrganizationStructureModel> response = client.Execute<OrganizationStructureModel>(request);
             return response.Data;
         }
 

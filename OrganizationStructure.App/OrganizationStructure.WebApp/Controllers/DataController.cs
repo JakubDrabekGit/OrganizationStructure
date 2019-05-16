@@ -34,7 +34,7 @@ namespace OrganizationStructure.WebApp.Controllers
 
         [HttpGet]
         [Route("OrganizationStructure/{id}")]
-        public OrganizationStructuresModel GetOrganizationStructure(Guid id)
+        public OrganizationStructureModel GetOrganizationStructure(Guid id)
         {
             return OStructureService.LoadOrganizationStructure(id);
         }

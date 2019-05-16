@@ -120,15 +120,11 @@ namespace OrganizationStructure.App.Services
 
         internal void LoadModelToAppModelFromServer(Guid structureId)
         {
-            List<OrganizationStructureModel> structureModels = new List<OrganizationStructureModel>();
-            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructure(structureId);
+            DataObjects.OrganizationStructureModel modelFromServer = ProxyService.GetOrganizationStructure(structureId);
 
-
-            if (modelsServer != null && modelsServer.OrganizationStructures != null)
+            if (modelFromServer != null)
             {
-                var model = modelsServer.OrganizationStructures.FirstOrDefault();
-
-                GlobalInstance.Instance.LoadModel(JsonConvert.DeserializeObject<MainModel>(model.ModelJson));
+                GlobalInstance.Instance.LoadModel(JsonConvert.DeserializeObject<MainModel>(modelFromServer.ModelJson));
             }
         }
 

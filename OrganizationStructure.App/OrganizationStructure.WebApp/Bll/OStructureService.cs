@@ -38,16 +38,11 @@ namespace OrganizationStructure.WebApp.Bll
             return structures;
         }
 
-        public OrganizationStructuresModel LoadOrganizationStructure(Guid id)
+        public OrganizationStructureModel LoadOrganizationStructure(Guid id)
         {
-            OrganizationStructuresModel structures = new OrganizationStructuresModel();
+            var structure = OStructureRepository.LoadOrganizationStructures().FirstOrDefault(s => s.Key == id);
 
-            foreach (var structure in OStructureRepository.LoadOrganizationStructures().Where(s=>s.Key == id))
-            {
-                structures.OrganizationStructures.Add(new OrganizationStructureModel() { Id = structure.Key, ModelJson = structure.Value });
-            }
-
-            return structures;
+            return new OrganizationStructureModel() { Id = structure.Key, ModelJson = structure.Value };
         }
     }
 }
