@@ -29,8 +29,9 @@ namespace OrganizationStructure.App.ViewModels.Dialogs
 
         private void InitData(LoadType loadType)
         {
+            LoadType = loadType;
             List<OrganizationStructureModel> listStructures = new List<OrganizationStructureModel>();
-            switch (loadType)
+            switch (LoadType)
             {
                 case LoadType.LoadFromServer:
                     listStructures = StructureService.LoadStructureModelsFromServer();
@@ -47,6 +48,7 @@ namespace OrganizationStructure.App.ViewModels.Dialogs
         }
 
         public ICommand LoadCommand { get; set; }
+        public LoadType LoadType { get; set; }
 
         public OrganizationStructureService StructureService
         {
@@ -100,7 +102,18 @@ namespace OrganizationStructure.App.ViewModels.Dialogs
             }
             else
             {
-                StructureService.LoadModelToApp(SelectedOStructure.Id);
+                switch (LoadType)
+                {
+                    case LoadType.LoadFromServer:
+                        StructureService.LoadModelToAppModelFromServer(SelectedOStructure.Id);
+                        break;
+                    case LoadType.LoadFromLocal:
+                        StructureService.LoadModelToApp(SelectedOStructure.Id);
+                        break;
+                    default:
+                        break;
+                }
+                
                 window.DialogResult = true;
                 window.Close();
             }

@@ -13,7 +13,7 @@ namespace OrganizationStructure.App.Models
         private int _Id;
         private string name;
         private string _Description;
-        private int _PersonId;
+        private int? _PersonId;
         private OrganizationStructureService _StructureService;
 
         public int Id
@@ -44,7 +44,7 @@ namespace OrganizationStructure.App.Models
             }
         }
 
-        public int PersonId
+        public int? PersonId
         {
             get { return _PersonId; }
             set

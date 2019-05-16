@@ -57,12 +57,21 @@ namespace OrganizationStructure.App.Services
             }
         }
 
-        public OrganizationStructuresModel GetOrganizationStructure()
+        public OrganizationStructuresModel GetOrganizationStructures()
         {
             var client = new RestClient(BaseUrl);
             client.Authenticator = new HttpBasicAuthenticator(LoginName, LoginPassword);
 
             var request = new RestRequest(ResourceName, Method.GET);
+            IRestResponse<OrganizationStructuresModel> response = client.Execute<OrganizationStructuresModel>(request);
+            return response.Data;
+        }
+        public OrganizationStructuresModel GetOrganizationStructure(Guid id)
+        {
+            var client = new RestClient(BaseUrl);
+            client.Authenticator = new HttpBasicAuthenticator(LoginName, LoginPassword);
+
+            var request = new RestRequest($"{ResourceName}/{id}", Method.GET);
             IRestResponse<OrganizationStructuresModel> response = client.Execute<OrganizationStructuresModel>(request);
             return response.Data;
         }

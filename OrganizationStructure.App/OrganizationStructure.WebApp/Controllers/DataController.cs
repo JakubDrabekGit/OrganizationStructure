@@ -32,6 +32,13 @@ namespace OrganizationStructure.WebApp.Controllers
             return OStructureService.LoadOrganizationStructures();
         }
 
+        [HttpGet]
+        [Route("OrganizationStructure/{id}")]
+        public OrganizationStructuresModel GetOrganizationStructure(Guid id)
+        {
+            return OStructureService.LoadOrganizationStructure(id);
+        }
+
         [HttpPost]
         [Route("OrganizationStructure")]
         public void SaveOrganizationStructure([FromBody]OrganizationStructureModel organizationStructure)

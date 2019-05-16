@@ -12,7 +12,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -28,7 +27,7 @@
             </ListView.ItemTemplate>
         </ListView>-->
 
-        <ListView Grid.Row="1" x:Name="OStrucuresListView" ItemsSource="{Binding OStructures}" SelectedItem="{Binding SelectedOStructure, Mode=TwoWay}"  >
+        <ListView Grid.Row="1" x:Name="OStrucuresListView" ItemsSource="{Binding OStructures}" SelectedItem="{Binding SelectedOStructure, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" >
             <ListView.Style>
                 <Style TargetType="{x:Type ListView}">
                     <Style.Triggers>
@@ -80,7 +79,7 @@
             </ListView.View>
         </ListView>
 
-        <Button x:Name="btnCreate" Grid.Row="3" Content="LOAD" Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=LoadOrganizationStructureDialog}" HorizontalAlignment="Left" />
-        <Button x:Name="btnCancel"  Grid.Row="3" Content="CANCEL" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
+        <Button x:Name="btnCreate" Grid.Row="2" Content="LOAD" Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=LoadOrganizationStructureDialog}" HorizontalAlignment="Left" />
+        <Button x:Name="btnCancel"  Grid.Row="2" Content="CANCEL" Click="BtnCancel_Click" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

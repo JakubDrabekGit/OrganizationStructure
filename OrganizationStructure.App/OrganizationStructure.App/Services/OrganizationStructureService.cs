@@ -68,7 +68,7 @@ namespace OrganizationStructure.App.Services
         {
             List<MainModel> mainModels = new List<MainModel>();
 
-            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructure();
+            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructures();
 
             foreach (var model in modelsServer.OrganizationStructures)
             {
@@ -99,7 +99,7 @@ namespace OrganizationStructure.App.Services
         internal List<OrganizationStructureModel> LoadStructureModelsFromServer()
         {
             List<OrganizationStructureModel> structureModels = new List<OrganizationStructureModel>();
-            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructure();
+            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructures();
 
             if (modelsServer != null)
             {
@@ -118,9 +118,23 @@ namespace OrganizationStructure.App.Services
             GlobalInstance.Instance.LoadModel(model);
         }
 
+        internal void LoadModelToAppModelFromServer(Guid structureId)
+        {
+            List<OrganizationStructureModel> structureModels = new List<OrganizationStructureModel>();
+            DataObjects.OrganizationStructuresModel modelsServer = ProxyService.GetOrganizationStructure(structureId);
+
+
+            if (modelsServer != null && modelsServer.OrganizationStructures != null)
+            {
+                var model = modelsServer.OrganizationStructures.FirstOrDefault();
+
+                GlobalInstance.Instance.LoadModel(JsonConvert.DeserializeObject<MainModel>(model.ModelJson));
+            }
+        }
+
         #region Person
 
-       
+
         internal void AddPerson(Person person)
         {
             GlobalInstance.Instance.Model.AddPerson(person);
@@ -130,11 +144,11 @@ namespace OrganizationStructure.App.Services
         {
             GlobalInstance.Instance.Model.RemovePerson(personId);
         }
-        internal Person GetPerson(int personId)
+        internal Person GetPerson(int? personId)
         {
             return GlobalInstance.Instance.Model.Persons.FirstOrDefault(x => x.Id == personId);
         }
-        internal string GetPersonFullName(int personId)
+        internal string GetPersonFullName(int? personId)
         {
             string fullName = "";
             Person person = GetPerson(personId);
@@ -169,9 +183,15 @@ namespace OrganizationStructure.App.Services
             return GlobalInstance.Instance.Model.Roles.FirstOrDefault(x => x.Id == roleId);
         }
 
-        internal string GetPersonRole(int PersonId)
+        internal string GetPersonRole(int? PersonId)
         {
-            return GlobalInstance.Instance.Model.Persons.FirstOrDefault(x => x.Id == PersonId).RoleName;
+            string roleName = String.Empty;
+            var person = GlobalInstance.Instance.Model.Persons.FirstOrDefault(x => x.Id == PersonId);
+            if (person != null)
+            {
+                roleName = person.RoleName;
+            }
+            return roleName;
         }
 
         internal int GetNewRoleId()

@@ -29,6 +29,7 @@ namespace OrganizationStructure.App.ViewModels
                 var person = StructureService.GetPerson(personId.Value);
                 LastName = person.LastName;
                 FirstName = person.FirstName;
+                SelectedRole = StructureService.GetRole(person.RoleId);
             }
 
             SavePersonCommand = new RelayCommand<System.Windows.Window>(SavePersonAction);

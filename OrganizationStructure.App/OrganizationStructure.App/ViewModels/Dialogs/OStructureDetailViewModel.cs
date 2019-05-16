@@ -121,7 +121,8 @@ namespace OrganizationStructure.App.ViewModels
                     Id = StructureService.GetNewStructureId(),
                     Name = this.StructureName,
                     Description = this.StructureDescription,
-                    PersonId = this.SelectedPerson.Id,
+
+                    PersonId = this.SelectedPerson?.Id,
                 };
 
                 if (ParentStructureId.HasValue)
